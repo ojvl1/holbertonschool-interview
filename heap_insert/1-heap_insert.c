@@ -10,13 +10,10 @@ int height(const binary_tree_t *tree)
 {
 	int left = 0;
 	int right = 0;
-
 	if (tree == NULL)
 		return (-1);
-
 	left = height(tree->left);
 	right = height(tree->right);
-
 	if (left > right)
 		return (left + 1);
 
@@ -35,18 +32,14 @@ int btree_is_perfect(const binary_tree_t *tree)
 	_Bool r_ch;
 	int l_per;
 	int r_per;
-
 	if (tree && height(tree->left) == height(tree->right))
 	{
 		if (height(tree->left) == -1)
 			return (1);
-
 		l_ch = !((tree->left)->left) && !((tree->left)->right);
 		r_ch = !((tree->right)->left) && !((tree->right)->right);
-
 		if ((tree->left && l_ch) && (tree->right && r_ch))
 			return (1);
-
 		if (tree && tree->left && tree->right)
 		{
 			l_per = btree_is_perfect(tree->left);
@@ -54,7 +47,6 @@ int btree_is_perfect(const binary_tree_t *tree)
 			return (l_per && r_per);
 		}
 	}
-
 	return (0);
 }
 
@@ -124,7 +116,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		*root = binary_tree_node(NULL, value);
 		return (*root);
 	}
-
 	if (btree_is_perfect(*root) || !btree_is_perfect((*root)->left))
 	{
 		if ((*root)->left)
@@ -140,7 +131,6 @@ heap_t *heap_insert(heap_t **root, int value)
 			return (new);
 		}
 	}
-
 	if ((*root)->right)
 	{
 		new = heap_insert(&((*root)->right), value);
@@ -153,6 +143,5 @@ heap_t *heap_insert(heap_t **root, int value)
 		swap(root, &((*root)->right));
 		return (new);
 	}
-
 	return (NULL);
 }
