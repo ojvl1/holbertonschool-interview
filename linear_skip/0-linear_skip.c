@@ -17,7 +17,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
   express = list->express;
   prev = list;
 
-  /* Traverse the express lane */
   while (express != NULL && express->n < value)
   {
     printf("Value checked at index [%lu] = [%d]\n", express->index, express->n);
@@ -25,7 +24,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
     express = express->express;
   }
 
-  /* If express is NULL, we need to traverse the normal lane from the last express node */
   if (express == NULL)
   {
     express = prev;
