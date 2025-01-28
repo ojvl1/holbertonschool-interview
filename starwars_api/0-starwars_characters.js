@@ -19,6 +19,7 @@ request(apiUrl, (error, response, body) => {
   const film = JSON.parse(body);
   const characters = film.characters;
 
+  // Fetch and print character names one per line
   characters.forEach((characterUrl) => {
     request(characterUrl, (error, response, body) => {
       if (error) {
