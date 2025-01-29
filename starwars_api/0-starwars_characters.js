@@ -1,25 +1,24 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 
 const movieId = process.argv[2];
 const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
 request(apiUrl, async (error, response, body) => {
   if (error) {
-    console.error("Error:", error);
+    console.error('Error:', error);
     return;
   }
 
   if (response.statusCode !== 200) {
-    console.error("Failed to fetch data:", response.statusCode);
+    console.error('Failed to fetch data:', response.statusCode);
     return;
   }
 
   const film = JSON.parse(body);
   const characters = film.characters;
 
-  // Function to fetch character name in order
   const fetchCharacterName = (url) => {
     return new Promise((resolve, reject) => {
       request(url, (error, response, body) => {
@@ -28,8 +27,7 @@ request(apiUrl, async (error, response, body) => {
           return;
         }
         if (response.statusCode !== 200) {
-          reject(`Failed to fetch character: ${response.statusCode}`);
-          return;
+          return Promise.reject(new Error('Failed to fetch character'));
         }
         const character = JSON.parse(body);
         resolve(character.name);
@@ -43,7 +41,7 @@ request(apiUrl, async (error, response, body) => {
       const name = await fetchCharacterName(url);
       console.log(name);
     } catch (err) {
-      console.error("Error:", err);
+      console.error('Error:', err);
     }
   }
 });
