@@ -1,27 +1,9 @@
-/**
- * heap_sort - Sorts an array using the heap sort algorithm
- * @array: The array to sort
- * @size: The size of the array
- */
-void heap_sort(int *array, size_t size)
-{
-  size_t end;
-  int i, temp;
+#ifndef SORT_H
+#define SORT_H
 
-  if (array == NULL || size < 2)
-    return;
+#include <stddef.h>
 
-  for (i = (size / 2) - 1; i >= 0; i--)
-    sift_down(array, i, size - 1, size);
+void print_array(const int *array, size_t size);
+void heap_sort(int *array, size_t size);
 
-  end = size - 1;
-  while (end > 0)
-  {
-    temp = array[0];
-    array[0] = array[end];
-    array[end] = temp;
-    print_array(array, size);
-    end--;
-    sift_down(array, 0, end, size);
-  }
-}
+#endif /* SORT_H */

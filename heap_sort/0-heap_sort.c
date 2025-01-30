@@ -1,14 +1,16 @@
 #include "sort.h"
 
-/**
- * sift_down - Sifts down a node to maintain the max heap property
- * @array: The array representing the heap
- * @start: The index to start sifting down from
- * @end: The end index of the heap
- * @size: The original size of the array (for printing)
- */
+/* Declare sift_down as static (only visible in this file) */
+static void sift_down(int *array, size_t start, size_t end, size_t size);
 
-void sift_down(int *array, size_t start, size_t end, size_t size)
+/**
+ * sift_down - Maintains max heap property
+ * @array: Array to sort
+ * @start: Start index
+ * @end: End index
+ * @size: Original array size (for printing)
+ */
+static void sift_down(int *array, size_t start, size_t end, size_t size)
 {
   size_t root = start;
   size_t child, swap_idx;
@@ -32,5 +34,34 @@ void sift_down(int *array, size_t start, size_t end, size_t size)
     array[swap_idx] = temp;
     print_array(array, size);
     root = swap_idx;
+  }
+}
+
+/**
+ * heap_sort - Sorts an array using heap sort
+ * @array: Array to sort
+ * @size: Size of the array
+ */
+void heap_sort(int *array, size_t size)
+{
+  size_t end;
+  int temp;
+
+  if (!array || size < 2)
+    return;
+
+  /* Fix loop variable type: use signed int for "i" */
+  for (int i = (size / 2) - 1; i >= 0; i--)
+    sift_down(array, i, size - 1, size);
+
+  end = size - 1;
+  while (end > 0)
+  {
+    temp = array[0];
+    array[0] = array[end];
+    array[end] = temp;
+    print_array(array, size);
+    end--;
+    sift_down(array, 0, end, size);
   }
 }
