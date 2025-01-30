@@ -20,11 +20,6 @@ static int advanced_binary_helper(int *array, int low, int high, int value)
     return -1;
   }
 
-  if (low == high)
-  {
-    return (array[low] == value) ? low : -1;
-  }
-
   int mid = (low + high) / 2;
 
   if (array[mid] < value)
@@ -33,18 +28,21 @@ static int advanced_binary_helper(int *array, int low, int high, int value)
   }
   else
   {
-    int left_result = advanced_binary_helper(array, low, mid, value);
-    if (left_result != -1)
+    if (array[mid] == value)
     {
-      return left_result;
-    }
-    else if (array[mid] == value)
-    {
-      return mid;
+      if (mid == low || array[mid - 1] < value)
+      {
+        return mid;
+      }
+      else
+      {
+        int left_result = advanced_binary_helper(array, low, mid - 1, value);
+        return (left_result != -1) ? left_result : mid;
+      }
     }
     else
     {
-      return -1;
+      return advanced_binary_helper(array, low, mid, value);
     }
   }
 }
