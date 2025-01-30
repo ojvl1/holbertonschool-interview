@@ -2,14 +2,18 @@
 
 import requests
 
-def count_words(subreddit, word_list, after=None, counts=None, processed_words=None):
+
+def count_words(subreddit, word_list, after=None,
+                counts=None, processed_words=None):
     if counts is None:
-        # Initial call: process word_list and initialize counts and processed_words
+        # Initial call: process word_list
+        # and initialize counts and processed_words
         counts = {}
         processed_words = {}
         for word in word_list:
             lower_word = word.lower()
-            processed_words[lower_word] = processed_words.get(lower_word, 0) + 1
+            processed_words[lower_word] = processed_words.get(lower_word, 0)
+            + 1
     else:
         # Ensure processed_words is not None in recursive calls
         if processed_words is None:
@@ -21,7 +25,8 @@ def count_words(subreddit, word_list, after=None, counts=None, processed_words=N
     if after:
         params['after'] = after
 
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
 
     if response.status_code != 200:
         return
@@ -33,7 +38,8 @@ def count_words(subreddit, word_list, after=None, counts=None, processed_words=N
         for word in title.split():
             lower_word = word.lower()
             if lower_word in processed_words:
-                counts[lower_word] = counts.get(lower_word, 0) + processed_words[lower_word]
+                counts[lower_word] = counts.get(lower_word, 0)
+                + processed_words[lower_word]
 
     new_after = data['data'].get('after')
     if new_after:
