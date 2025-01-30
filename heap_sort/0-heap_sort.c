@@ -46,17 +46,19 @@ void heap_sort(int *array, size_t size)
 {
   size_t end;
   int temp;
+  int i;
 
   if (!array || size < 2)
     return;
 
-  /* Fix loop variable type: use signed int for "i" */
-  for (int i = (size / 2) - 1; i >= 0; i--)
+  /* Build max heap */
+  for (i = (size / 2) - 1; i >= 0; i--)
     sift_down(array, i, size - 1, size);
 
   end = size - 1;
   while (end > 0)
   {
+    /* Swap root (max) with last element */
     temp = array[0];
     array[0] = array[end];
     array[end] = temp;
