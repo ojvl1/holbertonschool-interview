@@ -17,7 +17,7 @@ for (i = 1; i < size; i++)
 if (array[i] > max)
 max = array[i];
 }
-return max;
+return (max);
 }
 
 /**
@@ -45,7 +45,7 @@ count[(array[i] / exp) % 10]++;
 for (i = 1; i < 10; i++)
 {
 count[i] += count[i - 1];
-}       
+}
 
 for (i = size - 1; i < size; i--)
 {
