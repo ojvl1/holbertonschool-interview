@@ -10,7 +10,7 @@
  */
 int max(int a, int b)
 {
-    return (a > b ? a : b);
+return (a > b ? a : b);
 }
 
 /**
@@ -20,9 +20,12 @@ int max(int a, int b)
  */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (1 + max(binary_tree_height(tree->left), binary_tree_height(tree->right)));
+if (!tree)
+{
+return (0);
+}
+return (1 + max(binary_tree_height(tree->left),
+binary_tree_height(tree->right)));
 }
 
 /**
@@ -34,12 +37,14 @@ size_t binary_tree_height(const binary_tree_t *tree)
  */
 int binary_tree_is_bst(const binary_tree_t *tree, int min, int max)
 {
-    if (!tree)
-        return (1);
-    if (tree->n <= min || tree->n >= max)
-        return (0);
-    return (binary_tree_is_bst(tree->left, min, tree->n) &&
-            binary_tree_is_bst(tree->right, tree->n, max));
+if (!tree)
+return (1);
+if (tree->n <= min || tree->n >= max)
+{
+return (0);
+}
+return (binary_tree_is_bst(tree->left, min, tree->n) &&
+binary_tree_is_bst(tree->right, tree->n, max));
 }
 
 /**
@@ -49,9 +54,11 @@ int binary_tree_is_bst(const binary_tree_t *tree, int min, int max)
  */
 int binary_tree_balance_factor(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
+if (!tree)
+{
+return (0);
+}
+return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
 }
 
 /**
@@ -61,13 +68,13 @@ int binary_tree_balance_factor(const binary_tree_t *tree)
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    if (!binary_tree_is_bst(tree, INT_MIN, INT_MAX))
-        return (0);
-    if (abs(binary_tree_balance_factor(tree)) > 1)
-        return (0);
-    if (tree && !tree->left && !tree->right)
-        return (1);
-    return (binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right));
+if (!tree)
+return (0);
+if (!binary_tree_is_bst(tree, INT_MIN, INT_MAX))
+return (0);
+if (abs(binary_tree_balance_factor(tree)) > 1)
+return (0);
+if (tree && !tree->left && !tree->right)
+return (1);
+return (binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right));
 }
