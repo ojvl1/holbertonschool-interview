@@ -1,12 +1,23 @@
 #!/usr/bin/python3
 
+"""
+  is_prime_sieve: 
+          Uses the Sieve of Eratosthenes 
+          algorithm to identify prime numbers and counts
+          how many primes exist up to each index.
+
+  isWinner:
+          In each round, a set of consecutive integers
+          from 1 to n is used. Players take
+          turns choosing a prime number and removing 
+          it and its multiples from the set.
+          The player who cannot make a move loses the round. 
+          Maria always goes first.
+"""
+
 def is_prime_sieve(n):
     """
     Generates a list of the number of prime numbers up to each number from 0 to n.
-
-    Uses the Sieve of Eratosthenes algorithm to identify prime numbers and counts
-    how many primes exist up to each index.
-
     Args:
         n (int): The maximum number up to which to generate prime counts.
 
@@ -32,10 +43,6 @@ def is_prime_sieve(n):
 def isWinner(x, nums):
     """
     Determines the winner of a series of prime number games.
-
-    In each round, a set of consecutive integers from 1 to n is used. Players take
-    turns choosing a prime number and removing it and its multiples from the set.
-    The player who cannot make a move loses the round. Maria always goes first.
 
     Both players play optimally.
 
