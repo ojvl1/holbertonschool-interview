@@ -2,6 +2,8 @@
 #include <string.h>
 #include "substring.h"
 
+int *build_word_count_map(const char **words, int nb_words, int word_len);
+
 /**
  * str_match_count - Count the matching occurrences of words in a substring
  * @substring: The substring to check
