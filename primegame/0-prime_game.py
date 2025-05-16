@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def is_prime_sieve(n):
     """Returns a list of prime counts up to n using Sieve of Eratosthenes"""
     sieve = [True] * (n + 1)
