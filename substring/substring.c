@@ -2,52 +2,37 @@
 #include <string.h>
 #include "substring.h"
 
-int *build_word_count_map(const char **words, int nb_words, int word_len);
-
 /**
- * str_match_count - Count the matching occurrences of words in a substring
- * @substring: The substring to check
+ * build_word_count_map - Count the matching occurrences
+ * of words in a substring
  * @words: Array of words to match
  * @nb_words: Number of words
  * @word_len: Length of each word
- * @word_count: Frequency of each word in the original words array
  *
  * Return: 1 if substring is valid, else 0
  */
-int str_match_count(const char *substring, const char **words, int nb_words,
-int word_len, int *word_count)
+int *build_word_count_map(const char **words, int nb_words, int word_len)
 {
-int *seen = calloc(nb_words, sizeof(int));
+int *word_count = calloc(nb_words, sizeof(int));
 int i, j;
 
-if (!seen)
-return (0);
+if (!word_count)
+return (NULL);
 
 for (i = 0; i < nb_words; i++)
 {
-const char *word = substring + i * word_len;
-for (j = 0; j < nb_words; j++)
+for (j = 0; j < i; j++)
 {
-if (!strncmp(word, words[j], word_len))
+if (strncmp(words[i], words[j], word_len) == 0)
 {
-seen[j]++;
-if (seen[j] > word_count[j])
-{
-free(seen);
-return (0);
-}
-;
+word_count[j]++;
+break;
 }
 }
-if (j == nb_words)
-{
-free(seen);
-return (0);
+if (j == i)
+word_count[i]++;
 }
-}
-
-free(seen);
-return (1);
+return (word_count);
 }
 
 /**
